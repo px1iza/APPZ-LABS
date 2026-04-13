@@ -8,7 +8,6 @@ namespace GameSimulation
 
         public event Action<string>? OnMessage;
 
-        // 1. Реєстрація гравця
         public Player RegisterPlayer(string name)
         {
             var player = new Player(name);
@@ -16,7 +15,6 @@ namespace GameSimulation
             return player;
         }
 
-        // 2. Вхід
         public void Login(Player player)
         {
             player.Account.Login();
@@ -25,7 +23,6 @@ namespace GameSimulation
             OnMessage?.Invoke($"Користувач {player.Name} увійшов в акаунт");
         }
 
-        // 3. Вихід
         public void Logout()
         {
             if (CurrentPlayer == null)
@@ -40,7 +37,6 @@ namespace GameSimulation
             CurrentPlayer = null;
         }
 
-        // 4. Додати гру в бібліотеку
         public void AddGameToLibrary(Game game)
         {
             if (CurrentPlayer == null)
@@ -54,7 +50,6 @@ namespace GameSimulation
             OnMessage?.Invoke($"Гру {game.Name} додано до бібліотеки");
         }
 
-        // 5. Показати ігри гравця
         public void ShowGames()
         {
             if (CurrentPlayer == null)

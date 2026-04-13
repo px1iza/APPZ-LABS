@@ -23,49 +23,48 @@ namespace GameSimulation
                 return;
             }
 
-            // 🔥 ЄДИНА перевірка правил
             if (!_rules.CanRun(game, device))
             {
-                OnMessage?.Invoke("❌ Цю гру не можна встановити на цей пристрій");
+                OnMessage?.Invoke("Цю гру не можна встановити на цей пристрій");
                 return;
             }
 
             if (device.FreeHdd < game.Size)
             {
-                OnMessage?.Invoke($"❌ Недостатньо місця на HDD (потрібно {game.Size} GB, доступно {device.FreeHdd} GB)");
+                OnMessage?.Invoke($"Недостатньо місця на HDD (потрібно {game.Size} GB, доступно {device.FreeHdd} GB)");
                 return;
             }
 
             device.FreeHdd -= game.Size;
             game.IsInstalled = true;
 
-            OnMessage?.Invoke($"✅ {game.Name} встановлено (залишилось {device.FreeHdd} GB)");
+            OnMessage?.Invoke($"{game.Name} встановлено (залишилось {device.FreeHdd} GB)");
         }
 
         public void Run(Game game, Device device, Player player)
         {
             if (!game.IsInstalled)
             {
-                OnMessage?.Invoke("❌ Гра не встановлена");
+                OnMessage?.Invoke("Гра не встановлена");
                 return;
             }
 
             if (!player.Account.IsLoggedIn)
             {
-                OnMessage?.Invoke("❌ Увійдіть в акаунт");
+                OnMessage?.Invoke("Увійдіть в акаунт");
                 return;
             }
 
             if (CurrentRunningGame != null)
             {
-                OnMessage?.Invoke($"❌ Вже запущена гра '{CurrentRunningGame.Name}'. Спочатку зупиніть її.");
+                OnMessage?.Invoke($"Вже запущена гра '{CurrentRunningGame.Name}'. Спочатку зупиніть її.");
                 return;
             }
 
             if (!device.Hardware.Meets(game.Requirements))
             {
                 OnMessage?.Invoke(
-                    $"❌ Апаратне забезпечення не відповідає вимогам гри.\n" +
+                    $"Апаратне забезпечення не відповідає вимогам гри.\n" +
                     $"   Потрібно: CPU={game.Requirements.Cpu}, RAM={game.Requirements.Ram}, GPU={game.Requirements.Gpu}\n" +
                     $"   Є: CPU={device.Hardware.Cpu}, RAM={device.Hardware.Ram}, GPU={device.Hardware.Gpu}");
                 return;
@@ -86,7 +85,7 @@ namespace GameSimulation
         {
             if (!game.IsRunning)
             {
-                OnMessage?.Invoke("❌ Гра не запущена");
+                OnMessage?.Invoke("Гра не запущена");
                 return;
             }
 
@@ -95,14 +94,14 @@ namespace GameSimulation
             CurrentRunningGame = null;
             player.CurrentDevice = null;
 
-            OnMessage?.Invoke($"🛑 {game.Name} зупинено");
+            OnMessage?.Invoke($"{game.Name} зупинено");
         }
 
         public void Save(Game game)
         {
             if (!game.IsRunning)
             {
-                OnMessage?.Invoke("❌ Немає запущеної гри");
+                OnMessage?.Invoke("Немає запущеної гри");
                 return;
             }
 
@@ -114,7 +113,7 @@ namespace GameSimulation
         {
             if (!game.IsRunning)
             {
-                OnMessage?.Invoke("❌ Гра не запущена");
+                OnMessage?.Invoke("Гра не запущена");
                 return;
             }
 

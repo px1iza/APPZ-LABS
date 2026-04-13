@@ -1,4 +1,5 @@
 using System;
+
 namespace GameSimulation
 {
     public enum OperatingSystemType

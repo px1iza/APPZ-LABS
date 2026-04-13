@@ -12,9 +12,9 @@ namespace GameSimulation
         public int FreeHdd { get; set; }
 
         public List<Controller> Controllers { get; } = new();
+
         public event Action<string>? OnMessage;
 
-        // 📡 STREAM STATE
         public bool IsStreaming { get; private set; }
         public Device? StreamingTarget { get; private set; }
         public Game? StreamingGame { get; private set; }
@@ -33,24 +33,23 @@ namespace GameSimulation
             FreeHdd = freeHdd;
         }
 
-        // ================= STREAM =================
         public void StartStream(Device target, Game? currentGame)
         {
             if (Platform != Platform.Mobile)
             {
-                Send("❌ Стрім доступний тільки з мобільного пристрою");
+                Send("Стрім доступний тільки з мобільного пристрою");
                 return;
             }
 
             if (IsStreaming)
             {
-                Send("❌ Стрім вже активний");
+                Send("Стрім вже активний");
                 return;
             }
 
             if (currentGame == null || !currentGame.IsRunning)
             {
-                Send("❌ Немає запущеної гри для стріму");
+                Send("Немає запущеної гри для стріму");
                 return;
             }
 
@@ -58,15 +57,14 @@ namespace GameSimulation
             StreamingTarget = target;
             StreamingGame = currentGame;
 
-            Send($"📡 Трансляція {currentGame.Name} з {Name} → {target.Name}");
+            Send($"Трансляція {currentGame.Name} з {Name} → {target.Name}");
         }
 
-        // ================= STOP STREAM =================
         public void StopStream()
         {
             if (!IsStreaming)
             {
-                Send("❌ Стрім не активний");
+                Send("Стрім не активний");
                 return;
             }
 
@@ -76,6 +74,7 @@ namespace GameSimulation
             StreamingTarget = null;
             StreamingGame = null;
         }
+
         private void Send(string message)
         {
             OnMessage?.Invoke(message);

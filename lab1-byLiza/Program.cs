@@ -28,6 +28,7 @@ namespace GameSimulation
             {
                 playerService.Login(player);
             }
+
             player.Account.OnMessage += Console.WriteLine;
 
             var pc = new Device("PC", Platform.PC, OperatingSystemType.Windows, new Hardware(8, 16, 6), 100);
@@ -99,10 +100,11 @@ namespace GameSimulation
                 Console.WriteLine($"  {i + 1}. {devices[i].Name} [{devices[i].Platform}/{devices[i].OS}]");
 
             Console.Write("Вибір: ");
+
             if (int.TryParse(Console.ReadLine(), out int idx) && idx >= 1 && idx <= devices.Count)
                 return devices[idx - 1];
 
-            Console.WriteLine("⚠️ Невірний вибір, використовується перший девайс");
+            Console.WriteLine("Невірний вибір, використовується перший девайс");
             return devices[0];
         }
 
@@ -110,20 +112,19 @@ namespace GameSimulation
         {
             if (!player.Account.IsLoggedIn)
             {
-                Console.WriteLine("❌ Спочатку увійдіть в акаунт");
+                Console.WriteLine("Спочатку увійдіть в акаунт");
                 return;
             }
 
             if (player.CurrentGame == null || !player.CurrentGame.IsRunning)
             {
-                Console.WriteLine("❌ Немає запущеної гри для стріму");
+                Console.WriteLine("Немає запущеної гри для стріму");
                 return;
             }
 
-            // 🔥 ГОЛОВНА ПЕРЕВІРКА
             if (player.CurrentDevice != mobile)
             {
-                Console.WriteLine("❌ Стрім можливий тільки якщо гра запущена на телефоні");
+                Console.WriteLine("Стрім можливий тільки якщо гра запущена на телефоні");
                 return;
             }
 
@@ -139,13 +140,14 @@ namespace GameSimulation
         static void CheckCanRun(Player player, GameRulesService rules, Device device)
         {
             var game = SelectGame(player);
+
             if (game == null) return;
 
             var result = rules.CanRun(game, device);
 
             Console.WriteLine(result
-                ? $"✅ {game.Name} можна запустити на {device.Name}"
-                : $"❌ {game.Name} не можна запустити на {device.Name}");
+                ? $"{game.Name} можна запустити на {device.Name}"
+                : $"{game.Name} не можна запустити на {device.Name}");
         }
 
         static void ShowMyGames(Player player)
@@ -162,7 +164,7 @@ namespace GameSimulation
             {
                 string status = g.IsInstalled ? "[✔]" : "[ ]";
                 string running = g.IsRunning ? " 🟢" : "";
-                string saves = g.Saves.Count > 0 ? $" 💾{g.Saves.Count}" : "";
+                string saves = g.Saves.Count > 0 ? $"{g.Saves.Count}" : "";
 
                 Console.WriteLine($"  - {g.Name} {status}{running}{saves}");
             }
@@ -179,15 +181,20 @@ namespace GameSimulation
             }
 
             Console.Write("Оберіть гру (або 0): ");
-            if (!int.TryParse(Console.ReadLine(), out int index) || index == 0) return;
+
+            if (!int.TryParse(Console.ReadLine(), out int index) || index == 0)
+                return;
 
             if (index >= 1 && index <= storeGames.Count)
+            {
                 playerService.AddGameToLibrary(storeGames[index - 1]);
+            }
         }
 
         static void InstallGame(Player player, GameService gameService, Device device)
         {
             var game = SelectGame(player, true);
+
             if (game == null) return;
 
             gameService.Install(game, device);
@@ -196,6 +203,7 @@ namespace GameSimulation
         static void RunGame(Player player, GameService gameService, Device device)
         {
             var game = SelectGame(player);
+
             if (game == null) return;
 
             gameService.Run(game, device, player);
@@ -205,7 +213,7 @@ namespace GameSimulation
         {
             if (player.CurrentGame == null)
             {
-                Console.WriteLine("❌ Немає запущеної гри");
+                Console.WriteLine("Немає запущеної гри");
                 return;
             }
 
@@ -216,7 +224,7 @@ namespace GameSimulation
         {
             if (player.CurrentGame == null)
             {
-                Console.WriteLine("❌ Гра не запущена");
+                Console.WriteLine("Гра не запущена");
                 return;
             }
 
@@ -227,13 +235,13 @@ namespace GameSimulation
         {
             if (!player.Account.IsLoggedIn)
             {
-                Console.WriteLine("❌ Увійдіть в акаунт");
+                Console.WriteLine("Увійдіть в акаунт");
                 return;
             }
 
             if (player.CurrentGame == null)
             {
-                Console.WriteLine("❌ Гра не запущена");
+                Console.WriteLine("Гра не запущена");
                 return;
             }
 
@@ -241,7 +249,7 @@ namespace GameSimulation
 
             if (game.Saves.Count == 0)
             {
-                Console.WriteLine("❌ Немає збережень");
+                Console.WriteLine("Немає збережень");
                 return;
             }
 
@@ -257,7 +265,7 @@ namespace GameSimulation
             if (!int.TryParse(Console.ReadLine(), out int index) ||
                 index < 1 || index > game.Saves.Count)
             {
-                Console.WriteLine("❌ Невірний вибір");
+                Console.WriteLine("Невірний вибір");
                 return;
             }
 
@@ -268,7 +276,7 @@ namespace GameSimulation
         {
             if (player.Games == null || player.Games.Count == 0)
             {
-                Console.WriteLine("❌ Немає ігор");
+                Console.WriteLine("Немає ігор");
                 return null;
             }
 
@@ -279,7 +287,7 @@ namespace GameSimulation
 
             if (games.Count == 0)
             {
-                Console.WriteLine("❌ Немає доступних ігор");
+                Console.WriteLine("Немає доступних ігор");
                 return null;
             }
 
@@ -289,6 +297,7 @@ namespace GameSimulation
                 Console.WriteLine($"  {i + 1}. {games[i].Name}");
 
             Console.Write("Вибір: ");
+
             if (!int.TryParse(Console.ReadLine(), out int index) || index == 0)
                 return null;
 
@@ -304,7 +313,7 @@ namespace GameSimulation
 
             if (playerService.CurrentPlayer == null)
             {
-                Console.WriteLine("❌ Немає користувача");
+                Console.WriteLine("Немає користувача");
                 return;
             }
 
@@ -332,14 +341,14 @@ namespace GameSimulation
         {
             if (player.CurrentGame == null || !player.CurrentGame.IsRunning)
             {
-                Console.WriteLine("❌ Немає гри");
+                Console.WriteLine("Немає гри");
                 return;
             }
 
             if (!rules.CanPlayMultiplayer(player.CurrentGame, device))
                 return;
 
-            Console.WriteLine($"🎮 Мультиплеєр у {player.CurrentGame.Name}");
+            Console.WriteLine($"Мультиплеєр у {player.CurrentGame.Name}");
         }
     }
 }

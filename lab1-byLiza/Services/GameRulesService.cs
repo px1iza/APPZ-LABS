@@ -48,18 +48,17 @@ namespace GameSimulation
             return false;
         }
 
-        // 🔥 НОВИЙ МЕТОД (винесли бізнес-логіку)
         public bool CanPlayMultiplayer(Game game, Device device)
         {
             if (game is not RPGGame)
             {
-                OnMessage?.Invoke("❌ Мультиплеєр доступний тільки в RPG");
+                OnMessage?.Invoke("Мультиплеєр доступний тільки в RPG");
                 return false;
             }
 
             if (device.Controllers == null || device.Controllers.Count < 2)
             {
-                OnMessage?.Invoke("❌ Потрібно мінімум 2 контролери");
+                OnMessage?.Invoke("Потрібно мінімум 2 контролери");
                 return false;
             }
 
