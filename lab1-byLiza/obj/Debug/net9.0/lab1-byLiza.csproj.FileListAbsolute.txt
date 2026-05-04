@@ -26,3 +26,4 @@
 /Users/elizavetarabirokh/Documents/APPZ-Labs/lab1-byLiza/obj/Debug/net9.0/lab1-byLiza.pdb
 /Users/elizavetarabirokh/Documents/APPZ-Labs/lab1-byLiza/obj/Debug/net9.0/lab1-byLiza.genruntimeconfig.cache
 /Users/elizavetarabirokh/Documents/APPZ-Labs/lab1-byLiza/obj/Debug/net9.0/ref/lab1-byLiza.dll
+/Users/elizavetarabirokh/Documents/APPZ-Labs/lab1-byLiza/obj/Debug/net9.0/lab1-byLiza.sourcelink.json

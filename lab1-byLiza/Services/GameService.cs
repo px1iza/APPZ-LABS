@@ -19,7 +19,7 @@ namespace GameSimulation
         {
             if (game.IsInstalled)
             {
-                OnMessage?.Invoke("⚠️ Гра вже встановлена");
+                OnMessage?.Invoke("Гра вже встановлена");
                 return;
             }
 
