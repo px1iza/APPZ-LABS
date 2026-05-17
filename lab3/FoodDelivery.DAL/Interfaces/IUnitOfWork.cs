@@ -6,5 +6,6 @@ public interface IUnitOfWork
     IRepository<Dish> Dishes { get; }
     IRepository<Order> Orders { get; }
     IRepository<OrderItem> OrderItems { get; }
+    IRepository<MenuItem> MenuItems { get; }
     Task SaveAsync();
 }

@@ -9,16 +9,17 @@ namespace FoodDelivery.DAL.Context
             : base(options) { }
 
         public DbSet<Dish> Dishes { get; set; }
-
         public DbSet<Order> Orders { get; set; }
-
         public DbSet<OrderItem> OrderItems { get; set; }
+
+        // ➕ НОВЕ
+        public DbSet<MenuItem> MenuItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // 🍽 Dish
+            // 🍽 DISH (залишаємо як є)
             modelBuilder.Entity<Dish>(entity =>
             {
                 entity.Property(d => d.Title)
@@ -30,12 +31,9 @@ namespace FoodDelivery.DAL.Context
 
                 entity.Property(d => d.Category)
                     .IsRequired();
-
-                entity.Property(d => d.DayOfWeek)
-                    .IsRequired();
             });
 
-            // 🧾 Order
+            // 🧾 ORDER (без змін)
             modelBuilder.Entity<Order>(entity =>
             {
                 entity.Property(o => o.TotalPrice)
@@ -53,7 +51,7 @@ namespace FoodDelivery.DAL.Context
                     .OnDelete(DeleteBehavior.Cascade);
             });
 
-            // 🍴 OrderItem
+            // 🍴 ORDER ITEM (без змін)
             modelBuilder.Entity<OrderItem>(entity =>
             {
                 entity.Property(oi => oi.Quantity)
@@ -66,71 +64,42 @@ namespace FoodDelivery.DAL.Context
                     .OnDelete(DeleteBehavior.Restrict);
             });
 
-            // 🌱 START DATA
+            // 📅 MENU ITEM (НОВЕ — ключова частина)
+            modelBuilder.Entity<MenuItem>(entity =>
+            {
+                entity.Property(mi => mi.DayOfWeek)
+                    .IsRequired();
+
+                entity.HasOne(mi => mi.Dish)
+                    .WithMany()
+                    .HasForeignKey(mi => mi.DishId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // 🌱 DISH SEED (залишив як у тебе)
             modelBuilder.Entity<Dish>().HasData(
+                new Dish { Id = 1, Title = "Борщ", Price = 120, Category = DishCategory.FirstCourses },
+                new Dish { Id = 2, Title = "Смажена картопля", Price = 110, Category = DishCategory.SecondCourses },
+                new Dish { Id = 3, Title = "Вареники", Price = 130, Category = DishCategory.SecondCourses },
+                new Dish { Id = 4, Title = "Салат Цезар", Price = 140, Category = DishCategory.ColdDishes },
+                new Dish { Id = 5, Title = "Чай", Price = 40, Category = DishCategory.Drinks },
+                new Dish { Id = 6, Title = "Кава", Price = 55, Category = DishCategory.Drinks },
+                new Dish { Id = 7, Title = "Вода", Price = 30, Category = DishCategory.Drinks }
+            );
 
-                new Dish
-                {
-                    Id = 1,
-                    Title = "Борщ",
-                    Price = 120,
-                    DayOfWeek = DayOfWeek.Monday,
-                    Category = DishCategory.FirstCourses
-                },
+            // 🍱 MENU SEED (НОВЕ — це і є твоє меню)
+            modelBuilder.Entity<MenuItem>().HasData(
+                new MenuItem { Id = 1, DishId = 1, DayOfWeek = DayOfWeek.Monday },
+                new MenuItem { Id = 2, DishId = 5, DayOfWeek = DayOfWeek.Monday },
 
-                new Dish
-                {
-                    Id = 2,
-                    Title = "Смажена картопля",
-                    Price = 110,
-                    DayOfWeek = DayOfWeek.Monday,
-                    Category = DishCategory.SecondCourses
-                },
+                new MenuItem { Id = 3, DishId = 2, DayOfWeek = DayOfWeek.Tuesday },
+                new MenuItem { Id = 4, DishId = 3, DayOfWeek = DayOfWeek.Tuesday },
 
-                new Dish
-                {
-                    Id = 3,
-                    Title = "Вареники",
-                    Price = 130,
-                    DayOfWeek = DayOfWeek.Tuesday,
-                    Category = DishCategory.SecondCourses
-                },
+                new MenuItem { Id = 5, DishId = 4, DayOfWeek = DayOfWeek.Wednesday },
 
-                new Dish
-                {
-                    Id = 4,
-                    Title = "Салат Цезар",
-                    Price = 140,
-                    DayOfWeek = DayOfWeek.Wednesday,
-                    Category = DishCategory.ColdDishes
-                },
+                new MenuItem { Id = 6, DishId = 6, DayOfWeek = DayOfWeek.Friday },
 
-                new Dish
-                {
-                    Id = 5,
-                    Title = "Чай",
-                    Price = 40,
-                    DayOfWeek = DayOfWeek.Monday,
-                    Category = DishCategory.Drinks
-                },
-
-                new Dish
-                {
-                    Id = 6,
-                    Title = "Кока-Кола",
-                    Price = 55,
-                    DayOfWeek = DayOfWeek.Friday,
-                    Category = DishCategory.Drinks
-                },
-
-                new Dish
-                {
-                    Id = 7,
-                    Title = "Вода",
-                    Price = 30,
-                    DayOfWeek = DayOfWeek.Saturday,
-                    Category = DishCategory.Drinks
-                }
+                new MenuItem { Id = 7, DishId = 7, DayOfWeek = DayOfWeek.Saturday }
             );
         }
     }

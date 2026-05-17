@@ -4,14 +4,14 @@
     "/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.UI/FoodDelivery.UI.csproj": {}
   },
   "projects": {
-    "/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.BLL/FoodDelivery.BLL.csproj": {
+    "/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.Bll/FoodDelivery.BLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.BLL/FoodDelivery.BLL.csproj",
+        "projectUniqueName": "/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.Bll/FoodDelivery.BLL.csproj",
         "projectName": "FoodDelivery.BLL",
-        "projectPath": "/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.BLL/FoodDelivery.BLL.csproj",
+        "projectPath": "/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.Bll/FoodDelivery.BLL.csproj",
         "packagesPath": "/Users/elizavetarabirokh/.nuget/packages/",
-        "outputPath": "/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.BLL/obj/",
+        "outputPath": "/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.Bll/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/elizavetarabirokh/.nuget/NuGet/NuGet.Config"
@@ -160,8 +160,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.BLL/FoodDelivery.BLL.csproj": {
-                "projectPath": "/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.BLL/FoodDelivery.BLL.csproj"
+              "/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.Bll/FoodDelivery.BLL.csproj": {
+                "projectPath": "/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.Bll/FoodDelivery.BLL.csproj"
               }
             }
           }

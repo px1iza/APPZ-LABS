@@ -3065,8 +3065,8 @@
     },
     "FoodDelivery.BLL/1.0.0": {
       "type": "project",
-      "path": "../FoodDelivery.BLL/FoodDelivery.BLL.csproj",
-      "msbuildProject": "../FoodDelivery.BLL/FoodDelivery.BLL.csproj"
+      "path": "../FoodDelivery.Bll/FoodDelivery.BLL.csproj",
+      "msbuildProject": "../FoodDelivery.Bll/FoodDelivery.BLL.csproj"
     },
     "FoodDelivery.DAL/1.0.0": {
       "type": "project",
@@ -3107,8 +3107,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.BLL/FoodDelivery.BLL.csproj": {
-              "projectPath": "/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.BLL/FoodDelivery.BLL.csproj"
+            "/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.Bll/FoodDelivery.BLL.csproj": {
+              "projectPath": "/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.Bll/FoodDelivery.BLL.csproj"
             }
           }
         }

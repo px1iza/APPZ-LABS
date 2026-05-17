@@ -34,12 +34,6 @@ namespace FoodDelivery.DAL.Repositories
             await _dbSet.AddAsync(entity);
         }
 
-        // UPDATE
-        public void Update(T entity)
-        {
-            _dbSet.Update(entity);
-        }
-
         // DELETE
         public void Delete(T entity)
         {

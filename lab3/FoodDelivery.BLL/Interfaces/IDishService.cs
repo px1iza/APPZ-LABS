@@ -9,6 +9,6 @@ namespace FoodDelivery.BLL.Interfaces
 
         Task<List<DishDTO>> GetByCategoryAsync(DishCategory category);
 
-        Task<List<DishDTO>> GetByDayAsync(DayOfWeek day);
+        Task<DishDTO?> GetByIdAsync(int id);
     }
 }

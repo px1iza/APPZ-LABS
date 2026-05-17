@@ -1,3 +1,4 @@
+using FoodDelivery.DAL.Entities;
 namespace FoodDelivery.BLL.DTO
 {
     public class DishDTO
@@ -5,7 +6,6 @@ namespace FoodDelivery.BLL.DTO
         public int Id { get; set; }
         public string Title { get; set; }
         public decimal Price { get; set; }
-        public DayOfWeek DayOfWeek { get; set; }
-        public DishCategoryDTO Category { get; set; }
+        public DishCategory Category { get; set; }
     }
 }

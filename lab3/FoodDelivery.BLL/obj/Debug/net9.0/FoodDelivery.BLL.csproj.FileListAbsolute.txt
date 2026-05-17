@@ -1,4 +1,4 @@
-/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.BLL/bin/Debug/net9.0/FoodDelivery.BLL.deps.json
+/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.Bll/bin/Debug/net9.0/FoodDelivery.BLL.deps.json
 /Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.BLL/bin/Debug/net9.0/FoodDelivery.BLL.dll
 /Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.BLL/bin/Debug/net9.0/FoodDelivery.BLL.pdb
 /Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.BLL/bin/Debug/net9.0/FoodDelivery.DAL.dll
@@ -9,8 +9,8 @@
 /Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.BLL/obj/Debug/net9.0/FoodDelivery.BLL.AssemblyInfo.cs
 /Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.BLL/obj/Debug/net9.0/FoodDelivery.BLL.csproj.CoreCompileInputs.cache
 /Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.BLL/obj/Debug/net9.0/FoodDelivery.BLL.sourcelink.json
-/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.BLL/obj/Debug/net9.0/FoodDeli.4C1713D2.Up2Date
+/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.Bll/obj/Debug/net9.0/FoodDeli.4C1713D2.Up2Date
 /Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.BLL/obj/Debug/net9.0/FoodDelivery.BLL.dll
 /Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.BLL/obj/Debug/net9.0/refint/FoodDelivery.BLL.dll
 /Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.BLL/obj/Debug/net9.0/FoodDelivery.BLL.pdb
-/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.BLL/obj/Debug/net9.0/ref/FoodDelivery.BLL.dll
+/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.Bll/obj/Debug/net9.0/ref/FoodDelivery.BLL.dll
