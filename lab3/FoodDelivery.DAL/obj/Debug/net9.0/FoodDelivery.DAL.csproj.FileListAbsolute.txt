@@ -1,0 +1,13 @@
+/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.DAL/bin/Debug/net9.0/FoodDelivery.DAL.deps.json
+/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.DAL/bin/Debug/net9.0/FoodDelivery.DAL.dll
+/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.DAL/bin/Debug/net9.0/FoodDelivery.DAL.pdb
+/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.DAL/obj/Debug/net9.0/FoodDelivery.DAL.csproj.AssemblyReference.cache
+/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.DAL/obj/Debug/net9.0/FoodDelivery.DAL.GeneratedMSBuildEditorConfig.editorconfig
+/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.DAL/obj/Debug/net9.0/FoodDelivery.DAL.AssemblyInfoInputs.cache
+/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.DAL/obj/Debug/net9.0/FoodDelivery.DAL.AssemblyInfo.cs
+/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.DAL/obj/Debug/net9.0/FoodDelivery.DAL.csproj.CoreCompileInputs.cache
+/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.DAL/obj/Debug/net9.0/FoodDelivery.DAL.sourcelink.json
+/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.DAL/obj/Debug/net9.0/FoodDelivery.DAL.dll
+/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.DAL/obj/Debug/net9.0/refint/FoodDelivery.DAL.dll
+/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.DAL/obj/Debug/net9.0/FoodDelivery.DAL.pdb
+/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.DAL/obj/Debug/net9.0/ref/FoodDelivery.DAL.dll

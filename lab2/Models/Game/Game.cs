@@ -75,7 +75,6 @@ namespace GameSimulation
             IsLoggedIn = true;
             OnStatusChanged($"користувач '{username}' увійшов");
         }
-
         public virtual void Logout()
         {
             if (IsRunning)
@@ -87,7 +86,6 @@ namespace GameSimulation
             OnStatusChanged("користувач вийшов");
         }
 
-        // ===== PLAY =====
         public virtual void Play()
         {
             if (!IsInstalled)
