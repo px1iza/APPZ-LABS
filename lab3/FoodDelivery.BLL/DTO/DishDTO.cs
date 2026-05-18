@@ -1,4 +1,4 @@
-using FoodDelivery.DAL.Entities;
+using FoodDelivery.BLL.Enum;
 namespace FoodDelivery.BLL.DTO
 {
     public class DishDTO
@@ -6,6 +6,6 @@ namespace FoodDelivery.BLL.DTO
         public int Id { get; set; }
         public string Title { get; set; }
         public decimal Price { get; set; }
-        public DishCategory Category { get; set; }
+        public DishCategoryEnum Category { get; set; }
     }
 }

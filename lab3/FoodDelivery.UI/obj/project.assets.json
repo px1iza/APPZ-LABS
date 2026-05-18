@@ -1035,6 +1035,21 @@
         "runtime": {
           "bin/placeholder/FoodDelivery.DAL.dll": {}
         }
+      },
+      "FoodDelivery.IoC/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "FoodDelivery.BLL": "1.0.0",
+          "FoodDelivery.DAL": "1.0.0",
+          "Microsoft.Extensions.DependencyInjection": "10.0.8"
+        },
+        "compile": {
+          "bin/placeholder/FoodDelivery.IoC.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FoodDelivery.IoC.dll": {}
+        }
       }
     }
   },
@@ -3065,19 +3080,25 @@
     },
     "FoodDelivery.BLL/1.0.0": {
       "type": "project",
-      "path": "../FoodDelivery.Bll/FoodDelivery.BLL.csproj",
-      "msbuildProject": "../FoodDelivery.Bll/FoodDelivery.BLL.csproj"
+      "path": "../FoodDelivery.BLL/FoodDelivery.BLL.csproj",
+      "msbuildProject": "../FoodDelivery.BLL/FoodDelivery.BLL.csproj"
     },
     "FoodDelivery.DAL/1.0.0": {
       "type": "project",
       "path": "../FoodDelivery.DAL/FoodDelivery.DAL.csproj",
       "msbuildProject": "../FoodDelivery.DAL/FoodDelivery.DAL.csproj"
+    },
+    "FoodDelivery.IoC/1.0.0": {
+      "type": "project",
+      "path": "../FoodDelivery.IoC/FoodDelivery.IoC.csproj",
+      "msbuildProject": "../FoodDelivery.IoC/FoodDelivery.IoC.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
       "AutoMapper >= 16.1.1",
       "FoodDelivery.BLL >= 1.0.0",
+      "FoodDelivery.IoC >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.0",
       "Microsoft.Extensions.DependencyInjection >= 10.0.8"
     ]
@@ -3107,8 +3128,11 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.Bll/FoodDelivery.BLL.csproj": {
-              "projectPath": "/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.Bll/FoodDelivery.BLL.csproj"
+            "/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.BLL/FoodDelivery.BLL.csproj": {
+              "projectPath": "/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.BLL/FoodDelivery.BLL.csproj"
+            },
+            "/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.IoC/FoodDelivery.IoC.csproj": {
+              "projectPath": "/Users/elizavetarabirokh/Documents/APPZ-Labs/lab3/FoodDelivery.IoC/FoodDelivery.IoC.csproj"
             }
           }
         }

@@ -1,47 +1,16 @@
-﻿using FoodDelivery.BLL.Interfaces;
-using FoodDelivery.BLL.Services;
-using FoodDelivery.DAL.Context;
-using FoodDelivery.DAL.Interfaces;
-using FoodDelivery.DAL.Repositories;
-using Microsoft.EntityFrameworkCore;
+﻿using FoodDelivery.IoC;
+using FoodDelivery.UI.Menus;
 using Microsoft.Extensions.DependencyInjection;
-using FoodDelivery.BLL.Mapping;
 
-namespace FoodDelivery.UI
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
+var services = new ServiceCollection();
+services.AddLogging();
 
-            var services = new ServiceCollection();
+services.AddFoodDelivery();
 
-            // 🧾 DB CONTEXT
-            services.AddDbContext<AppDbContext>(options =>
-        options.UseMySql(
-            "server=localhost;port=3306;database=FoodDeliveryDb;user=root;password=root123",
-            ServerVersion.AutoDetect("server=localhost;port=3306;database=FoodDeliveryDb;user=root;password=root123")
-        )
-    );
+services.AddTransient<MainMenu>();
 
-            // 📦 DAL
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+var provider = services.BuildServiceProvider();
 
-            // 🧠 BLL SERVICES
-            services.AddScoped<IDishService, DishService>();
-            services.AddScoped<IMenuService, MenuService>();
-            services.AddScoped<IOrderService, OrderService>();
+var menu = provider.GetRequiredService<MainMenu>();
 
-            // 🔄 AutoMapper
-            services.AddAutoMapper(typeof(MappingProfile));
-
-            var serviceProvider = services.BuildServiceProvider();
-
-            // 🚀 запуск програми (як у FitnessClub ConsoleApp)
-            var app = serviceProvider.GetRequiredService<ConsoleApp>();
-            app.Run();
-        }
-    }
-}
+await menu.RunAsync();

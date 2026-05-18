@@ -16,25 +16,21 @@ namespace FoodDelivery.DAL.Repositories
             _dbSet = _context.Set<T>();
         }
 
-        // READ ALL
         public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
         }
 
-        // READ BY ID
         public async Task<T?> GetByIdAsync(int id)
         {
             return await _dbSet.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        // CREATE
         public async Task AddAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
         }
 
-        // DELETE
         public void Delete(T entity)
         {
             _dbSet.Remove(entity);

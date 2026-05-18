@@ -2,14 +2,13 @@ using AutoMapper;
 using FoodDelivery.DAL.Interfaces;
 using FoodDelivery.BLL.DTO;
 using FoodDelivery.BLL.Interfaces;
-using FoodDelivery.DAL.Entities;
+using FoodDelivery.BLL.Enum;
 
 namespace FoodDelivery.BLL.Services
 {
     public class DishService : IDishService
     {
         private readonly IUnitOfWork _uow;
-
         private readonly IMapper _mapper;
 
         public DishService(IUnitOfWork uow, IMapper mapper)
@@ -17,44 +16,51 @@ namespace FoodDelivery.BLL.Services
             _uow = uow;
             _mapper = mapper;
         }
-        // 🍽 Отримати всі страви
+
         public async Task<List<DishDTO>> GetAllAsync()
         {
             var dishes = await _uow.Dishes.GetAllAsync();
 
+            if (dishes == null || !dishes.Any())
+                throw new Exception("Страви не знайдено в системі");
+
             return _mapper.Map<List<DishDTO>>(dishes);
         }
 
-        // 🔍 Отримати по ID
-
-        public async Task<DishDTO?> GetByIdAsync(int id)
-        {
-            var dish = await _uow.Dishes.GetByIdAsync(id);
-            if (dish == null)
-
-                return null;
-
-            return _mapper.Map<DishDTO>(dish);
-        }
-
-        // 🧾 Фільтр по категорії
-
-        public async Task<List<DishDTO>> GetByCategoryAsync(DishCategory category)
+        public async Task<List<DishDTO>> GetByCategoryAsync(DishCategoryEnum category)
         {
             var dishes = await _uow.Dishes.GetAllAsync();
-            var filtered = dishes
-                .Where(d => d.Category == category)
-                .ToList();
-            return _mapper.Map<List<DishDTO>>(filtered);
 
+            if (dishes == null || !dishes.Any())
+                throw new Exception("Страви не знайдено в системі");
+
+            var filtered = dishes
+                .Where(d => d.Category == (DAL.Entities.DishCategory)(int)category)
+                .ToList();
+
+            if (!filtered.Any())
+                throw new Exception($"Страви категорії {category} не знайдено");
+
+            return _mapper.Map<List<DishDTO>>(filtered);
         }
 
         public async Task<List<DishDTO>> SearchAsync(string keyword)
         {
+            if (string.IsNullOrWhiteSpace(keyword))
+                throw new ArgumentException("Ключове слово не може бути порожнім");
+
             var dishes = await _uow.Dishes.GetAllAsync();
+
+            if (dishes == null || !dishes.Any())
+                throw new Exception("Страви не знайдено в системі");
+
             var filtered = dishes
                 .Where(d => d.Title.ToLower().Contains(keyword.ToLower()))
                 .ToList();
+
+            if (!filtered.Any())
+                throw new Exception($"Страви за запитом '{keyword}' не знайдено");
+
             return _mapper.Map<List<DishDTO>>(filtered);
         }
     }

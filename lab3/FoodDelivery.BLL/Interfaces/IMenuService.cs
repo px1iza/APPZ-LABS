@@ -1,19 +1,15 @@
 using FoodDelivery.BLL.DTO;
-using FoodDelivery.DAL.Entities;
+using FoodDelivery.BLL.Enum;
 
 namespace FoodDelivery.BLL.Interfaces
 {
     public interface IMenuService
     {
-        // 📅 меню на день
         Task<List<DishDTO>> GetMenuByDayAsync(DayOfWeek day);
-
-        // 🍱 комплексний обід
         Task<List<DishDTO>> GetComplexLunchAsync(DayOfWeek day);
-
-        // 🔎 фільтр по категорії в межах дня
-        Task<List<DishDTO>> GetByCategoryAndDayAsync(
-            DayOfWeek day,
-            DishCategory category);
+        Task<(List<DishDTO> dishes, decimal originalPrice, decimal discountedPrice, decimal savings)>
+            GetComplexLunchWithPriceAsync(DayOfWeek day);
+        Task<List<(DayOfWeek day, List<DishDTO> dishes, decimal originalPrice, decimal discountedPrice, decimal savings)>>
+            GetAllComplexLunchesAsync();
     }
 }

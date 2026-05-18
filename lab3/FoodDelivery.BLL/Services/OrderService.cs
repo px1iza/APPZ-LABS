@@ -12,6 +12,8 @@ namespace FoodDelivery.BLL.Services
         private readonly IMapper _mapper;
         private readonly IMenuService _menuService;
 
+        private const decimal COMPLEX_DISCOUNT = 0.15m; // 15% знижка
+
         public OrderService(
             IUnitOfWork uow,
             IMapper mapper,
@@ -22,35 +24,55 @@ namespace FoodDelivery.BLL.Services
             _menuService = menuService;
         }
 
-        // 🍽 замовлення окремих страв
-        public async Task<OrderDTO> CreateOrderAsync(List<int> dishIds)
+        public async Task<OrderDTO> CreateOrderAsync(Dictionary<int, int> dishesWithQuantity)
         {
-            if (dishIds == null || !dishIds.Any())
-                throw new Exception("Не вибрано жодної страви");
+            if (dishesWithQuantity == null || !dishesWithQuantity.Any())
+                throw new ArgumentException("Не вибрано жодної страви");
+
+            foreach (var kvp in dishesWithQuantity)
+            {
+                if (kvp.Value < 1)
+                    throw new ArgumentException($"Кількість для страви #{kvp.Key} має бути >= 1");
+            }
 
             var dishes = await _uow.Dishes.GetAllAsync();
 
+            if (dishes == null || !dishes.Any())
+                throw new Exception("Страви не знайдено в системі");
+
             var selectedDishes = dishes
-                .Where(d => dishIds.Contains(d.Id))
+                .Where(d => dishesWithQuantity.Keys.Contains(d.Id))
                 .ToList();
 
-            if (selectedDishes.Count != dishIds.Count)
-                throw new Exception("Деякі страви не знайдено");
+            if (selectedDishes.Count != dishesWithQuantity.Count)
+            {
+                var notFound = dishesWithQuantity.Keys
+                    .Except(selectedDishes.Select(d => d.Id))
+                    .ToList();
+                throw new Exception($"Страви не знайдено: {string.Join(", ", notFound)}");
+            }
+
+            decimal totalPrice = 0;
+            var orderItems = new List<OrderItem>();
+
+            foreach (var dish in selectedDishes)
+            {
+                int quantity = dishesWithQuantity[dish.Id];
+                totalPrice += dish.Price * quantity;
+
+                orderItems.Add(new OrderItem
+                {
+                    DishId = dish.Id,
+                    Quantity = quantity
+                });
+            }
 
             var order = new Order
             {
                 OrderDate = DateTime.Now,
                 IsComplex = false,
-
-                TotalPrice = selectedDishes.Sum(d => d.Price),
-
-                OrderItems = selectedDishes
-                    .Select(d => new OrderItem
-                    {
-                        DishId = d.Id,
-                        Quantity = 1
-                    })
-                    .ToList()
+                TotalPrice = totalPrice,
+                OrderItems = orderItems
             };
 
             await _uow.Orders.AddAsync(order);
@@ -59,37 +81,64 @@ namespace FoodDelivery.BLL.Services
             return _mapper.Map<OrderDTO>(order);
         }
 
-        // 🍱 замовлення комплексного обіду
-        public async Task<OrderDTO> CreateComplexLunchOrderAsync(
-            DayOfWeek day)
+        public async Task<OrderDTO> CreateComplexLunchOrderAsync(DayOfWeek day)
         {
-            var complexLunch =
-                await _menuService.GetComplexLunchAsync(day);
+            var complexLunch = await _menuService.GetComplexLunchAsync(day);
 
-            if (!complexLunch.Any())
-                throw new Exception(
-                    "Комплексний обід недоступний");
+            if (complexLunch == null || complexLunch.Count < 2)
+                throw new Exception("Комплексний обід недоступний");
+
+            decimal originalPrice = complexLunch.Sum(d => d.Price);
+            decimal discountedPrice = originalPrice * (1 - COMPLEX_DISCOUNT);
+
+            var orderItems = complexLunch
+                .Select(d => new OrderItem
+                {
+                    DishId = d.Id,
+                    Quantity = 1
+                })
+                .ToList();
 
             var order = new Order
             {
                 OrderDate = DateTime.Now,
                 IsComplex = true,
-
-                TotalPrice = complexLunch.Sum(d => d.Price),
-
-                OrderItems = complexLunch
-                    .Select(d => new OrderItem
-                    {
-                        DishId = d.Id,
-                        Quantity = 1
-                    })
-                    .ToList()
+                TotalPrice = discountedPrice,
+                OrderItems = orderItems
             };
 
             await _uow.Orders.AddAsync(order);
             await _uow.SaveAsync();
 
             return _mapper.Map<OrderDTO>(order);
+        }
+
+        public async Task<(List<(string DishTitle, int Quantity, decimal Price, decimal ItemTotal)> items, decimal totalPrice)>
+            GetOrderDetailsForDisplayAsync(Dictionary<int, int> dishesWithQuantity)
+        {
+            if (dishesWithQuantity == null || !dishesWithQuantity.Any())
+                throw new ArgumentException("Не вибрано жодної страви");
+
+            var dishes = await _uow.Dishes.GetAllAsync();
+
+            if (dishes == null || !dishes.Any())
+                throw new Exception("Страви не знайдено в системі");
+
+            var items = new List<(string, int, decimal, decimal)>();
+            decimal totalPrice = 0;
+
+            foreach (var kvp in dishesWithQuantity)
+            {
+                var dish = dishes.FirstOrDefault(d => d.Id == kvp.Key);
+                if (dish == null)
+                    throw new Exception($"Страва з ID {kvp.Key} не знайдена");
+
+                decimal itemTotal = dish.Price * kvp.Value;
+                totalPrice += itemTotal;
+                items.Add((dish.Title, kvp.Value, dish.Price, itemTotal));
+            }
+
+            return (items, totalPrice);
         }
     }
 }

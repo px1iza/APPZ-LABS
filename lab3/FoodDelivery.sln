@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodDelivery.BLL", "FoodDel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodDelivery.UI", "FoodDelivery.UI\FoodDelivery.UI.csproj", "{1BF97DE0-517E-4ED8-A173-1CBEA0E4F553}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodDelivery.IoC", "FoodDelivery.IoC\FoodDelivery.IoC.csproj", "{9DFE46A8-0734-48E1-9A4C-E2F00A02CB08}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{1BF97DE0-517E-4ED8-A173-1CBEA0E4F553}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BF97DE0-517E-4ED8-A173-1CBEA0E4F553}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BF97DE0-517E-4ED8-A173-1CBEA0E4F553}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DFE46A8-0734-48E1-9A4C-E2F00A02CB08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DFE46A8-0734-48E1-9A4C-E2F00A02CB08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DFE46A8-0734-48E1-9A4C-E2F00A02CB08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DFE46A8-0734-48E1-9A4C-E2F00A02CB08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
