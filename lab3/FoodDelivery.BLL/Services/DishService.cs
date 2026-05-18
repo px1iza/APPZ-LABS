@@ -34,14 +34,16 @@ namespace FoodDelivery.BLL.Services
             if (dishes == null || !dishes.Any())
                 throw new Exception("Страви не знайдено в системі");
 
-            var filtered = dishes
-                .Where(d => d.Category == (DAL.Entities.DishCategory)(int)category)
+            var dishDtos = _mapper.Map<List<DishDTO>>(dishes);
+
+            var filtered = dishDtos
+                .Where(d => d.Category == category)
                 .ToList();
 
             if (!filtered.Any())
                 throw new Exception($"Страви категорії {category} не знайдено");
 
-            return _mapper.Map<List<DishDTO>>(filtered);
+            return filtered;
         }
 
         public async Task<List<DishDTO>> SearchAsync(string keyword)
@@ -54,14 +56,16 @@ namespace FoodDelivery.BLL.Services
             if (dishes == null || !dishes.Any())
                 throw new Exception("Страви не знайдено в системі");
 
-            var filtered = dishes
-                .Where(d => d.Title.ToLower().Contains(keyword.ToLower()))
+            var dishDtos = _mapper.Map<List<DishDTO>>(dishes);
+
+            var filtered = dishDtos
+                .Where(d => d.Title != null && d.Title.ToLower().Contains(keyword.ToLower()))
                 .ToList();
 
             if (!filtered.Any())
                 throw new Exception($"Страви за запитом '{keyword}' не знайдено");
 
-            return _mapper.Map<List<DishDTO>>(filtered);
+            return filtered;
         }
     }
 }

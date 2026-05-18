@@ -14,13 +14,11 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddFoodDelivery(this IServiceCollection services)
     {
-        // DB
         services.AddDbContext<AppDbContext>(options =>
             options.UseMySql(
                 "server=localhost;database=FoodDeliveryDb;user=root;password=root123;",
                 ServerVersion.AutoDetect("server=localhost;database=FoodDeliveryDb;user=root;password=root123;")));
 
-        // DAL
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 

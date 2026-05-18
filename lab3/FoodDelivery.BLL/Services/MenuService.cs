@@ -1,5 +1,4 @@
 using AutoMapper;
-using FoodDelivery.DAL.Entities;
 using FoodDelivery.DAL.Interfaces;
 using FoodDelivery.BLL.DTO;
 using FoodDelivery.BLL.Interfaces;

@@ -12,7 +12,7 @@ namespace FoodDelivery.BLL.Services
         private readonly IMapper _mapper;
         private readonly IMenuService _menuService;
 
-        private const decimal COMPLEX_DISCOUNT = 0.15m; // 15% знижка
+        private const decimal COMPLEX_DISCOUNT = 0.15m;
 
         public OrderService(
             IUnitOfWork uow,
